@@ -1,0 +1,11 @@
+#root{
+    top:0;
+    left:0;
+    position:fixed;
+    width:100%;
+    background: linear-gradient(to right, #ff5e1e, #ff7f50, #ff7f50, #ff5e1e);
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
