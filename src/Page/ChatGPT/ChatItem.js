@@ -1,11 +1,5 @@
 import styled from "@emotion/styled";
-import {
-  Avatar,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Typography,
-} from "@mui/material";
+import { Avatar, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 import { Box } from "@mui/system";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";

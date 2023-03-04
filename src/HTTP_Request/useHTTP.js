@@ -1,14 +1,11 @@
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
 
-const useHTTP = (endpoint) => {
+const useHTTP = (props) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const accessToken = useSelector((redux) => redux.auth.idToken);
 
   const headers = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${accessToken}`,
+    ...props.headers,
   };
 
   const sendRequest = async (method, url, body = null) => {
@@ -19,10 +16,7 @@ const useHTTP = (endpoint) => {
         headers: headers,
       };
       if (body !== null && body) request.body = JSON.stringify(body);
-      const res = await fetch(
-        `${process.env.REACT_APP_API_URL}${endpoint}${url ? url : ""}`,
-        request
-      );
+      const res = await fetch(url, request);
       setLoading(false);
       return await res.json();
     } catch (err) {

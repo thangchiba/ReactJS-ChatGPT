@@ -1,12 +1,11 @@
 import styled from "@emotion/styled";
 import { Box } from "@mui/system";
-import { useEffect, useState } from "react";
-import ChatBoard from "./ChatBoard";
-import ChatForm from "./ChatForm";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import useHTTPGPT from "../../HTTP_Request/useHTTPGPT";
-import APIEndpoint from "../../HTTP_Request/APIEndpoint";
-import { useSelector } from "react-redux";
+import ChatBoard from "./ChatBoard";
+import ChatForm from "./ChatForm";
 
 const StyledCover = styled(Box)(({ theme }) => ({
   minWidth: "100vw",
@@ -39,7 +38,7 @@ const StyledChatBox = styled(Box)(({ theme }) => ({
 
 const ChatGPT = (props) => {
   const [messages, setMessages] = useState([]);
-  const gptAPI = useHTTPGPT(APIEndpoint.GPTTurbo);
+  const gptAPI = useHTTPGPT();
   const gptSetting = useSelector((redux) => redux.gpt);
 
   async function submitChat(content) {
@@ -51,15 +50,14 @@ const ChatGPT = (props) => {
       };
       let newMessages = [...messages, message];
       setMessages(newMessages);
-      const response = await gptAPI.post("", {
-        model: "gpt-3.5-turbo",
-        messages: newMessages.slice(-8).map((message) => {
+      const response = await gptAPI.post(
+        newMessages.slice(-8).map((message) => {
           return {
             role: message.role,
             content: message.content,
           };
-        }),
-      });
+        })
+      );
       const responseMessage = { ...response.choices[0].message, id: uuidv4() };
       newMessages = [...messages, message, responseMessage];
       console.log(newMessages);
