@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Divider, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import CommonModal from "../UIComponent/Common/CommonModal";
+import CommonModal from "../../UIComponent/Common/CommonModal";
 
 const StyledTutorialBox = styled(Box)(({ theme }) => ({
   width: "800px",

@@ -2,9 +2,9 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { IconButton, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useState } from "react";
-import CommonModal from "../UIComponent/Common/CommonModal";
+import CommonModal from "../../UIComponent/Common/CommonModal";
 import SetupToken from "./SetupToken";
-import SpeakSwitch from "./SpeakSwitch";
+import SpeakSwitch from "./Speaker/SpeakSwitch";
 import YoutubeTutorial from "./YoutubeTutorial";
 const Setting = () => {
   const [open, setOpen] = useState(false);

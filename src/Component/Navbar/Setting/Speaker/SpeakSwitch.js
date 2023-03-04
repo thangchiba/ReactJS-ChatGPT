@@ -1,10 +1,10 @@
-import VolumeUpIcon from "@mui/icons-material/VolumeUp";
-import { IconButton, MenuItem, Select } from "@mui/material";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
-import { useState, Fragment } from "react";
-import SelectVoice from "./SelectVoice";
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import { IconButton } from "@mui/material";
+import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { speakAction } from "../../Redux/SpeakSlice";
+import { speakAction } from "../../../../Redux/SpeakSlice";
+import SelectVoice from "./SelectVoice";
 const SpeakSwitch = () => {
   const isSpeak = useSelector((redux) => redux.speak.isSpeak);
   const dispatch = useDispatch();

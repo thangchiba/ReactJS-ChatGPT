@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { gptAction } from "../../Redux/GPTSlice";
+import { gptAction } from "../../../Redux/GPTSlice";
 const SetupToken = (props) => {
   const dispatch = useDispatch();
   const token = useSelector((redux) => redux.gpt.accessToken);

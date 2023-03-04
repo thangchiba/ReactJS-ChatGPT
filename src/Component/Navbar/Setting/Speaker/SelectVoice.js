@@ -1,7 +1,7 @@
 import { Button, TextField } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { speakAction } from "../../Redux/SpeakSlice";
+import { speakAction } from "../../../../Redux/SpeakSlice";
 import useSpeak from "./useSpeak";
 import VoiceSelectBox from "./VoiceSelectBox";
 

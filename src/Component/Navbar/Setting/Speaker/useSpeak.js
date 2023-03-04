@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { speakAction } from "../../Redux/SpeakSlice";
+import { speakAction } from "../../../../Redux/SpeakSlice";
 
 const useSpeak = () => {
   const dispatch = useDispatch();
