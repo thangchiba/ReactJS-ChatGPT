@@ -32,7 +32,7 @@ function VoiceSelectBox(props) {
           onChange={onChangeVoice}
         >
           {voices.map((voice) => (
-            <MenuItem key={voice.voiceURI} value={voice}>
+            <MenuItem key={voice.name} value={voice}>
               {`${voice.name} (${voice.lang})`}
             </MenuItem>
           ))}
@@ -44,7 +44,7 @@ function VoiceSelectBox(props) {
           value={rate}
           onChange={handleSliderChange}
           aria-labelledby="rate-slider-label"
-          step={0.1}
+          step={0.01}
           min={0.5}
           max={2}
         />

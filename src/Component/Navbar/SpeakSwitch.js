@@ -4,14 +4,14 @@ import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import { useState, Fragment } from "react";
 import SelectVoice from "./SelectVoice";
 import { useDispatch, useSelector } from "react-redux";
-import { gptAction } from "../../Redux/GPTSlice";
+import { speakAction } from "../../Redux/SpeakSlice";
 const SpeakSwitch = () => {
-  const isSpeak = useSelector((redux) => redux.gpt.isSpeak);
+  const isSpeak = useSelector((redux) => redux.speak.isSpeak);
   const dispatch = useDispatch();
   return (
     <Fragment>
       <IconButton
-        onClick={(e) => dispatch(gptAction.setSpeak({ isSpeak: !isSpeak }))}
+        onClick={(e) => dispatch(speakAction.config({ isSpeak: !isSpeak }))}
       >
         {isSpeak && <VolumeUpIcon />}
         {!isSpeak && <VolumeOffIcon />}

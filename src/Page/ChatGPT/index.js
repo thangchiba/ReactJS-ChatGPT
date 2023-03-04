@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
 import { Box } from "@mui/system";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import useHTTPGPT from "../../HTTP_Request/useHTTPGPT";
+import { speakAction } from "../../Redux/SpeakSlice";
 import ChatBoard from "./ChatBoard";
 import ChatForm from "./ChatForm";
 
@@ -37,9 +38,14 @@ const StyledChatBox = styled(Box)(({ theme }) => ({
 }));
 
 const ChatGPT = (props) => {
+  const dispatch = useDispatch();
   const [messages, setMessages] = useState([]);
   const gptAPI = useHTTPGPT();
-  const gptSetting = useSelector((redux) => redux.gpt);
+  const speak = useSelector((redux) => redux.speak);
+
+  useEffect(() => {
+    console.log(speak.isSpeaking);
+  }, [speak.isSpeaking]);
 
   async function submitChat(content) {
     try {
@@ -63,32 +69,14 @@ const ChatGPT = (props) => {
       console.log(newMessages);
       setMessages(newMessages);
 
-      if (gptSetting.isSpeak) {
-        handleSpeak(responseMessage.content);
+      if (speak.isSpeak) {
+        dispatch(speakAction.speak(responseMessage.content));
       }
     } catch {
       alert("Error when send message");
     }
   }
 
-  const handleSpeak = (content) => {
-    try {
-      if (gptSetting.voice && window.speechSynthesis) {
-        window.speechSynthesis.cancel();
-        // Create a new SpeechSynthesisUtterance object
-        const utterance = new SpeechSynthesisUtterance(content);
-
-        // Set the selected voice and rate on the utterance
-        utterance.voice = gptSetting.voice;
-        utterance.rate = gptSetting.rate;
-
-        // Speak the utterance
-        window.speechSynthesis.speak(utterance);
-      }
-    } catch {
-      console.log("Error when speak");
-    }
-  };
   return (
     <StyledCover>
       <StyledChatBox>

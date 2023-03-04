@@ -1,17 +1,10 @@
-import styled from "@emotion/styled";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import YouTubeIcon from "@mui/icons-material/YouTube";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { Fragment } from "react";
 import avatar from "../../Static/Images/Avatar/avatarRed.jpg";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import GitHubIcon from "@mui/icons-material/GitHub";
 import NeonAvatar from "./NeonAvatar";
-
-const StyledImage = styled("img")(({ theme }) => ({
-  borderRadius: 500,
-  width: "200px",
-  height: "200px",
-}));
 
 export default function Home() {
   return (

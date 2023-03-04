@@ -1,10 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const InitialState = {
-  accessToken: "",
-  isSpeak: true,
-  voice: "",
-  rate: 1,
+  accessToken: "thangchiba",
 };
 
 const GPTSlice = createSlice({
@@ -17,15 +14,6 @@ const GPTSlice = createSlice({
     },
     clearAuth(state, action) {
       state = InitialState;
-    },
-    setSpeak(state, action) {
-      state.isSpeak = action.payload.isSpeak;
-    },
-    setVoice(state, action) {
-      state.voice = action.payload.voice;
-    },
-    setRate(state, action) {
-      state.rate = action.payload.rate;
     },
   },
 });
