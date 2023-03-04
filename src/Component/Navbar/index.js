@@ -7,6 +7,9 @@ import Setting from "./Setting";
 const StyledToolbar = styled(Toolbar)({
   backgroundColor: "white",
   justifyContent: "space-around",
+  height: "70px",
+  margin: 0,
+  padding: 0,
 });
 
 function Navbar() {

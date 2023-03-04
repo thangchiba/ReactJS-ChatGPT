@@ -9,3 +9,10 @@
 ::-webkit-scrollbar {
     display: none;
 }
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+}

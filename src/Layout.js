@@ -3,7 +3,7 @@ import Navbar from "./Component/Navbar";
 // import MetaMessenger from "./Component/UIComponent/Common/MetaMessenger";
 function Layout(props) {
   return (
-    <Box>
+    <Box sx={{ padding: 0, margin: 0 }}>
       <Navbar />
       {/* <MetaMessenger /> */}
       {props.children}
