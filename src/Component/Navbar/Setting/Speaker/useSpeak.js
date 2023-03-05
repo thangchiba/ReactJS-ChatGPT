@@ -8,7 +8,9 @@ const useSpeak = () => {
   const speak = (content) => {
     try {
       if (speakState.voice && window.speechSynthesis) {
-        dispatch(speakAction.config({ isSpeaking: true }));
+        if (speakState.isSpeak) {
+          dispatch(speakAction.config({ isSpeaking: true }));
+        }
         window.speechSynthesis.cancel();
         // Create a new SpeechSynthesisUtterance object
         const utterance = new SpeechSynthesisUtterance(content);
@@ -27,6 +29,11 @@ const useSpeak = () => {
       console.log("Error when speak");
     }
   };
-  return { speak };
+
+  const stopSpeak = () => {
+    window.speechSynthesis.cancel();
+    dispatch(speakAction.config({ isSpeaking: false }));
+  };
+  return { speak, stopSpeak };
 };
 export default useSpeak;
