@@ -1,10 +1,8 @@
 import styled from "@emotion/styled";
 import { Box, LinearProgress, List, TextField } from "@mui/material";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { gptAction } from "../../Redux/GPTSlice";
 import ChatItem from "./ChatItem";
-import SettingsIcon from "@mui/icons-material/Settings";
 
 const StyledChatBoard = styled(Box)({
   width: "100%",

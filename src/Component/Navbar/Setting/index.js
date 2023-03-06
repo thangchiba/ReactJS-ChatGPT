@@ -3,24 +3,34 @@ import { IconButton, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useState } from "react";
 import CommonModal from "../../UIComponent/Common/CommonModal";
+import NewUpdate from "./NewUpdate";
 import SetupToken from "./SetupToken";
 import SpeakSwitch from "./Speaker/SpeakSwitch";
 import YoutubeTutorial from "./YoutubeTutorial";
 const Setting = () => {
   const [open, setOpen] = useState(false);
   const [youtube, setYoutube] = useState(true);
+  const [newUpdate, setNewUpdate] = useState(true);
   function handleCloseYoutube() {
     setOpen(true);
+  }
+  function handleCloseNewUpdate() {
+    // setOpen(true);
   }
   return (
     <>
       <IconButton onClick={(e) => setOpen(true)}>
         <SettingsIcon color="secondary" id="setting" />
       </IconButton>
-      <YoutubeTutorial
+      {/* <YoutubeTutorial
         open={youtube}
         setOpen={setYoutube}
         onClose={handleCloseYoutube}
+      /> */}
+      <NewUpdate
+        open={newUpdate}
+        setOpen={setNewUpdate}
+        onClose={handleCloseNewUpdate}
       />
       <CommonModal
         open={open}

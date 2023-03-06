@@ -30,7 +30,6 @@ const ChatItem = (props) => {
               .split(`\n`)
               .map((text) => <ListItemText primary={text} />);
           } else {
-            console.log(str);
             const code = str.replace(/```/g, "");
             return (
               <SyntaxHighlighter

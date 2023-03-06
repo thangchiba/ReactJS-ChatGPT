@@ -1,15 +1,17 @@
 import styled from "@emotion/styled";
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import { Fab, Grid } from "@mui/material";
 import { Box } from "@mui/system";
-import { Fragment, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import useSpeak from "../../Component/Navbar/Setting/Speaker/useSpeak";
 import useHTTPGPT from "../../HTTP_Request/useHTTPGPT";
+import { gptAction } from "../../Redux/GPTSlice";
 import ChatBoard from "./ChatBoard";
 import ChatForm from "./ChatForm";
-import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
-import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
+import { toast } from "react-toastify";
 const StyledCover = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     paddingBlock: 0,
@@ -43,15 +45,21 @@ const StyledChatBox = styled(Box)(({ theme }) => ({
     paddingBlock: "0px",
     paddingInline: "0px",
   },
+  position: "relative",
 }));
 
 const ChatGPT = (props) => {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const token = params.get("token");
+
   const speaker = useSpeak();
+  const speak = useSelector((redux) => redux.speak);
+  const gptAPI = useHTTPGPT();
   const [messages, setMessages] = useState(
     JSON.parse(localStorage.getItem("messages")) || []
   );
-  const gptAPI = useHTTPGPT();
-  const speak = useSelector((redux) => redux.speak);
 
   useEffect(() => {
     console.log(speak.isSpeaking);
@@ -60,6 +68,10 @@ const ChatGPT = (props) => {
   useEffect(() => {
     localStorage.setItem("messages", JSON.stringify(messages));
   }, [messages]);
+
+  useEffect(() => {
+    dispatch(gptAction.setAuth({ accessToken: token || "" }));
+  }, []);
 
   async function submitChat(content) {
     try {
@@ -84,7 +96,18 @@ const ChatGPT = (props) => {
       if (speak.isSpeak) {
         speaker.speak(response.content);
       }
-    } catch {}
+    } catch {
+      toast("🦄 Wow so easy!", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: ".",
+        theme: "light",
+      });
+    }
   }
   return (
     <StyledCover id="cover">
@@ -102,6 +125,19 @@ const ChatGPT = (props) => {
               chunkMessage={gptAPI.chunkMessage}
             />
             <ChatForm onSubmit={submitChat} />
+            <Fab
+              id="scroll-up"
+              sx={{ position: "absolute", top: 20, right: 10 }}
+              onClick={() => {
+                document
+                  .getElementById("chatboard")
+                  .scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              color="inherit"
+              size="small"
+            >
+              <KeyboardDoubleArrowDownIcon color="primary" />
+            </Fab>
           </StyledChatBox>
         </Grid>
         <Grid
@@ -110,31 +146,6 @@ const ChatGPT = (props) => {
           md={0.5}
         ></Grid>
       </Grid>
-      <Fab
-        id="scroll-up"
-        sx={{ position: "absolute", top: 20, right: 10 }}
-        onClick={() => {
-          document.getElementById("chatboard").scrollTo({
-            top: document.getElementById("chatboard").scrollHeight,
-          });
-          // .scrollTop({ top: 0, behavior: "smooth" });
-        }}
-        color="warning"
-      >
-        <KeyboardDoubleArrowUpIcon color="primary" />
-      </Fab>
-      <Fab
-        id="scroll-down"
-        sx={{ position: "absolute", bottom: "calc(70px)", right: 10 }}
-        onClick={() => {
-          document
-            .getElementById("chatboard")
-            .scrollTo({ top: 0, behavior: "smooth" });
-        }}
-        color="warning"
-      >
-        <KeyboardDoubleArrowDownIcon color="primary" />
-      </Fab>
     </StyledCover>
   );
 };
