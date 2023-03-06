@@ -19,7 +19,7 @@ const StyledChatBoard = styled(Box)({
 });
 
 const ChatBoard = (props) => {
-  const { addMessage, messages, loading } = props;
+  const { chunkMessage, messages, loading } = props;
   const dispatch = useDispatch();
   const token = useSelector((redux) => redux.gpt.accessToken);
 
@@ -45,6 +45,13 @@ const ChatBoard = (props) => {
         {messages.map((message) => (
           <ChatItem key={message.id} message={message} id={message.id} />
         ))}
+        {chunkMessage && (
+          <ChatItem
+            key={"chunk" + chunkMessage.id}
+            message={chunkMessage}
+            id={"chunk" + chunkMessage.id}
+          />
+        )}
         {loading && (
           <LinearProgress
             color="secondary"

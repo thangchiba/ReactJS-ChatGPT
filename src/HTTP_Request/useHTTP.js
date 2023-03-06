@@ -18,7 +18,7 @@ const useHTTP = (props) => {
       if (body !== null && body) request.body = JSON.stringify(body);
       const res = await fetch(url, request);
       setLoading(false);
-      return await res.json();
+      return await res;
     } catch (err) {
       setError(err);
       setLoading(false);

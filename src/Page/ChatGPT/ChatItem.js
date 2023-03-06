@@ -16,7 +16,7 @@ const ChatItem = (props) => {
   const codeBlockRegex = /```([\s\S]*?)```/;
   const strings = message.content.split(codeBlockRegex);
   return (
-    <StyledChatItem key={message.id}>
+    <StyledChatItem>
       <ListItemAvatar>
         <Avatar
           src={message.role === "user" ? cumeoLogo : twistedLogo}
@@ -28,12 +28,16 @@ const ChatItem = (props) => {
           if (index % 2 === 0) {
             return str
               .split(`\n`)
-              .map((text) => <ListItemText primary={text} key={index} />);
+              .map((text) => <ListItemText primary={text} />);
           } else {
             console.log(str);
             const code = str.replace(/```/g, "");
             return (
-              <SyntaxHighlighter language="javascript" style={dracula}>
+              <SyntaxHighlighter
+                language="javascript"
+                style={dracula}
+                showLineNumbers={true}
+              >
                 {code}
               </SyntaxHighlighter>
             );
