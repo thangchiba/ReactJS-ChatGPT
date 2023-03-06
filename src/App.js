@@ -4,7 +4,8 @@ import Layout from "./Layout";
 import Home from "./Page/Home";
 import ConfiguredTheme from "./theme";
 import ChatGPT from "./Page/ChatGPT";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme="dark"
       />
     </ThemeProvider>
   );

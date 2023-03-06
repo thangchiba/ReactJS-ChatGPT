@@ -11,7 +11,6 @@ import useHTTPGPT from "../../HTTP_Request/useHTTPGPT";
 import { gptAction } from "../../Redux/GPTSlice";
 import ChatBoard from "./ChatBoard";
 import ChatForm from "./ChatForm";
-import { toast } from "react-toastify";
 const StyledCover = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     paddingBlock: 0,
@@ -96,18 +95,7 @@ const ChatGPT = (props) => {
       if (speak.isSpeak) {
         speaker.speak(response.content);
       }
-    } catch {
-      toast("🦄 Wow so easy!", {
-        position: "bottom-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: ".",
-        theme: "light",
-      });
-    }
+    } catch {}
   }
   return (
     <StyledCover id="cover">
@@ -127,7 +115,11 @@ const ChatGPT = (props) => {
             <ChatForm onSubmit={submitChat} />
             <Fab
               id="scroll-up"
-              sx={{ position: "absolute", top: 20, right: 10 }}
+              sx={{
+                position: "absolute",
+                right: 10,
+                bottom: { xs: 70, md: 120 },
+              }}
               onClick={() => {
                 document
                   .getElementById("chatboard")

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import APIEndpoint from "./APIEndpoint";
 import useHTTP from "./useHTTP";
+import { toast } from "react-toastify";
 
 const useHTTPGPT = () => {
   const endpoint = APIEndpoint.GPTTurbo;
@@ -30,6 +31,8 @@ const useHTTPGPT = () => {
       stream: true,
     };
     const response = await post(endpoint, body);
+    if (!response.ok && response.status === 401)
+      toast("Access Token is not valid!");
     const stream = response.body.getReader();
     const responseMessage = await readStreamPromise(stream, setChunkMessage);
     return responseMessage;
