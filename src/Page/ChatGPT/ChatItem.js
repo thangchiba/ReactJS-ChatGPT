@@ -34,7 +34,6 @@ const ChatItem = (props) => {
               .map((text) => <ListItemText primary={text} />);
           } else {
             const code = str.replace(/```/g, "");
-            console.log(code.split("\n")[0]);
             return (
               <Box>
                 <SyntaxHighlighter
@@ -44,7 +43,8 @@ const ChatItem = (props) => {
                   // wrapLongLines={true}
                   customStyle={{
                     overflow: "scroll",
-                    maxWidth: "100%",
+                    // maxWidth: "100%",
+                    // fontSize: 12,
                   }}
                 >
                   {code}
