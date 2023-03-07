@@ -2,7 +2,10 @@ import styled from "@emotion/styled";
 import { Avatar, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 import { Box } from "@mui/system";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
+import {
+  dracula,
+  gruvboxDark,
+} from "react-syntax-highlighter/dist/esm/styles/prism";
 import cumeoLogo from "../../Static/Images/Logo/cumeo128.png";
 import twistedLogo from "../../Static/Images/Logo/twistedLogo.jpg";
 const StyledChatItem = styled(ListItem)({
@@ -17,7 +20,7 @@ const ChatItem = (props) => {
   const strings = message.content.split(codeBlockRegex);
   return (
     <StyledChatItem>
-      <ListItemAvatar>
+      <ListItemAvatar sx={{ maxWidth: 50 }}>
         <Avatar
           src={message.role === "user" ? cumeoLogo : twistedLogo}
           alt="Avatar"
@@ -31,14 +34,22 @@ const ChatItem = (props) => {
               .map((text) => <ListItemText primary={text} />);
           } else {
             const code = str.replace(/```/g, "");
+            console.log(code.split("\n")[0]);
             return (
-              <SyntaxHighlighter
-                language="javascript"
-                style={dracula}
-                showLineNumbers={true}
-              >
-                {code}
-              </SyntaxHighlighter>
+              <Box>
+                <SyntaxHighlighter
+                  language={code.split("\n")[0]}
+                  style={dracula}
+                  showLineNumbers={true}
+                  // wrapLongLines={true}
+                  customStyle={{
+                    overflow: "scroll",
+                    maxWidth: "100%",
+                  }}
+                >
+                  {code}
+                </SyntaxHighlighter>
+              </Box>
             );
           }
         })}

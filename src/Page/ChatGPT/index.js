@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import { Fab, Grid } from "@mui/material";
+import { BottomNavigation, Fab, Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +11,8 @@ import useHTTPGPT from "../../HTTP_Request/useHTTPGPT";
 import { gptAction } from "../../Redux/GPTSlice";
 import ChatBoard from "./ChatBoard";
 import ChatForm from "./ChatForm";
+import LeftDrawer from "./LeftDrawer";
+
 const StyledCover = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     paddingBlock: 0,
@@ -19,7 +21,7 @@ const StyledCover = styled(Box)(({ theme }) => ({
   color: "white",
   height: "calc(100vh - 70px)",
   minWidth: "100vw",
-  width: "100vw",
+  maxWidth: "100vw",
   margin: 0,
   paddingInline: 0,
   paddingBlock: 20,
@@ -32,6 +34,7 @@ const StyledCover = styled(Box)(({ theme }) => ({
 const StyledChatBox = styled(Box)(({ theme }) => ({
   height: "calc(87vh - 70px)",
   width: "90vw",
+  maxWidth: "90vw",
   color: "white",
   margin: 0,
   borderRadius: "15px",
@@ -39,7 +42,8 @@ const StyledChatBox = styled(Box)(({ theme }) => ({
   paddingInline: "20px",
   backgroundColor: "#242526",
   [theme.breakpoints.down("sm")]: {
-    width: "100vw",
+    minWidth: "100vw",
+    maxWidth: "100vw",
     height: "calc(85vh - 70px)",
     paddingBlock: "0px",
     paddingInline: "0px",
@@ -105,8 +109,9 @@ const ChatGPT = (props) => {
           sx={{ display: { xs: "none", md: "block" } }}
           md={0.5}
         ></Grid>
-        <Grid item md={11}>
+        <Grid item md={11} display="flex" flexDirection="row">
           <StyledChatBox id="chatbox" sx={{ backgroundColor: "inherit" }}>
+            <LeftDrawer />
             <ChatBoard
               messages={messages}
               loading={gptAPI.loading}
