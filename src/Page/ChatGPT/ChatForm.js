@@ -1,10 +1,8 @@
+import StopCircleOutlinedIcon from "@mui/icons-material/StopCircleOutlined";
 import { Box, Button, Grid, IconButton, TextField } from "@mui/material";
 import React, { useState } from "react";
-import StopCircleOutlinedIcon from "@mui/icons-material/StopCircleOutlined";
-import PlayCircleFilledWhiteOutlinedIcon from "@mui/icons-material/PlayCircleFilledWhiteOutlined";
-import { useDispatch, useSelector } from "react-redux";
-import { speakAction } from "../../Redux/SpeakSlice";
-import useSpeak from "../../Component/Navbar/Setting/Speaker/useSpeak";
+import { useSelector } from "react-redux";
+import useSpeak from "./RightDraw/Setting/Speaker/useSpeak";
 
 const ChatForm = ({ onSubmit }) => {
   const [message, setMessage] = useState("");

@@ -6,13 +6,13 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import useSpeak from "../../Component/Navbar/Setting/Speaker/useSpeak";
 import useHTTPGPT from "../../HTTP_Request/useHTTPGPT";
 import { gptAction } from "../../Redux/GPTSlice";
 import ChatBoard from "./ChatBoard";
 import ChatForm from "./ChatForm";
 import LeftDrawer from "./LeftDrawer";
 import RightDrawer from "./RightDraw";
+import useSpeak from "./RightDraw/Setting/Speaker/useSpeak";
 
 const StyledCover = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
@@ -65,10 +65,6 @@ const ChatGPT = (props) => {
   const [messages, setMessages] = useState(
     JSON.parse(localStorage.getItem("messages")) || []
   );
-
-  useEffect(() => {
-    console.log(speak.isSpeaking);
-  }, [speak.isSpeaking]);
 
   useEffect(() => {
     localStorage.setItem("messages", JSON.stringify(messages));

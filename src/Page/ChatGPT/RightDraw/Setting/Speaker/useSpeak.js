@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import { speakAction } from "../../../../../Redux/SpeakSlice";
 
 const useSpeak = () => {
@@ -40,7 +41,6 @@ const useSpeak = () => {
   const speak = (content) => {
     try {
       if (speakState.voice && window.speechSynthesis) {
-        console.log(speakState);
         if (speakState.isSpeak) {
           dispatch(speakAction.config({ isSpeaking: true }));
         }
@@ -59,7 +59,7 @@ const useSpeak = () => {
         };
       }
     } catch {
-      console.log("Error when speak");
+      toast("Error when speak");
     }
   };
 

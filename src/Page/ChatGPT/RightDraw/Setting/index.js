@@ -4,7 +4,7 @@ import { Stack } from "@mui/system";
 import { useState } from "react";
 import CommonModal from "../../../../Component/UIComponent/Common/CommonModal";
 import SetupToken from "./SetupToken";
-import SpeakSwitch from "./Speaker/SpeakSwitch";
+import SpeakSetting from "./Speaker/SpeakSetting";
 import YoutubeTutorial from "./YoutubeTutorial";
 const Setting = () => {
   const [open, setOpen] = useState(false);
@@ -23,7 +23,7 @@ const Setting = () => {
           Setting
         </Typography>
         <SetupToken />
-        <SpeakSwitch />
+        <SpeakSetting />
       </Stack>
     </>
   );

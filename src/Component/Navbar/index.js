@@ -2,7 +2,6 @@ import { AppBar, Box, styled, Toolbar } from "@mui/material";
 import CustomerInfo from "./CustomerInfo";
 import Logo from "./Logo";
 import MiddleBar from "./MiddleBar";
-import Setting from "./Setting";
 
 const StyledToolbar = styled(Toolbar)({
   backgroundColor: "white",
@@ -24,7 +23,6 @@ function Navbar() {
         <StyledToolbar>
           <Logo />
           <MiddleBar />
-          <Setting />
           <CustomerInfo />
         </StyledToolbar>
       </AppBar>
