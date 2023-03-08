@@ -1,8 +1,9 @@
 import BackspaceIcon from "@mui/icons-material/Backspace";
 import { Box, IconButton, TextField } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 
 const Conversation = ({ message, onDelete }) => {
+  const [value, setValue] = useState(prompt.content);
   return (
     <Box
       sx={{
@@ -20,7 +21,8 @@ const Conversation = ({ message, onDelete }) => {
       >
         <TextField
           style={{ width: 220 }}
-          value={message.content}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
           InputProps={{ style: { color: "white" } }}
           placeholder="Enter Conversation Name"
         ></TextField>

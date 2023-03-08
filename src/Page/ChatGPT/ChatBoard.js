@@ -29,7 +29,7 @@ const ChatBoard = (props) => {
   return (
     <StyledChatBoard id="chatboard">
       <List>
-        <TextField
+        {/* <TextField
           label="Access Token"
           variant="outlined"
           fullWidth
@@ -39,7 +39,7 @@ const ChatBoard = (props) => {
           InputProps={{ style: { color: "white" } }}
           focused
           placeholder="Enter Token In Here Before Start"
-        />
+        /> */}
         {messages.map((message) => (
           <ChatItem key={message.id} message={message} id={message.id} />
         ))}

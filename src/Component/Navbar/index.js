@@ -1,4 +1,4 @@
-import { AppBar, styled, Toolbar } from "@mui/material";
+import { AppBar, Box, styled, Toolbar } from "@mui/material";
 import CustomerInfo from "./CustomerInfo";
 import Logo from "./Logo";
 import MiddleBar from "./MiddleBar";
@@ -14,8 +14,13 @@ const StyledToolbar = styled(Toolbar)({
 
 function Navbar() {
   return (
-    <div>
-      <AppBar position="sticky" sx={{ backgroundColor: "red" }}>
+    <Box display={{ xs: "none", md: "block" }}>
+      <AppBar
+        position="sticky"
+        sx={{
+          backgroundColor: "red",
+        }}
+      >
         <StyledToolbar>
           <Logo />
           <MiddleBar />
@@ -23,7 +28,7 @@ function Navbar() {
           <CustomerInfo />
         </StyledToolbar>
       </AppBar>
-    </div>
+    </Box>
   );
 }
 

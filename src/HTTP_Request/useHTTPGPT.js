@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 const useHTTPGPT = () => {
   const endpoint = APIEndpoint.GPTTurbo;
   const accessToken = useSelector((redux) => redux.gpt.accessToken);
-  const freeToken = process.env.REACT_APP_GPT_TOKENS.split(",");
+  const freeToken = process.env.REACT_APP_GPT_TOKENS.split(",") || [""];
   function getRandomToken(array) {
     const index = Math.floor(Math.random() * array.length);
     return array[index];

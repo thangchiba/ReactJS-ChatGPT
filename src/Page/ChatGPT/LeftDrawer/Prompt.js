@@ -1,8 +1,9 @@
 import BackspaceIcon from "@mui/icons-material/Backspace";
 import { Box, IconButton, TextField } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 
 const Prompt = ({ prompt, onDelete }) => {
+  const [value, setValue] = useState(prompt.content);
   return (
     <Box
       sx={{
@@ -20,7 +21,8 @@ const Prompt = ({ prompt, onDelete }) => {
       >
         <TextField
           style={{ width: 220 }}
-          value={prompt.content}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
           label="Prompt"
           placeholder="Enter content to teach AI"
           InputLabelProps={{ style: { color: "white" }, shrink: true }}

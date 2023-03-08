@@ -1,11 +1,8 @@
-import MenuIcon from "@mui/icons-material/Menu";
-import { Button, Divider, Drawer, Fab, Stack, TextField } from "@mui/material";
+import SettingsIcon from "@mui/icons-material/Settings";
+import { Drawer, Fab } from "@mui/material";
 import { useState } from "react";
-import Conversation from "./Conversation";
-import ListConversation from "./ListConversation";
-import ListPrompt from "./ListPrompt";
-
-function LeftDrawer() {
+import Setting from "./Setting";
+function RightDrawer() {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDrawerOpen = () => {
@@ -22,18 +19,18 @@ function LeftDrawer() {
         onClick={handleDrawerOpen}
         sx={{
           position: "absolute",
-          left: "5px",
-          color: "red",
+          right: "5px",
+          color: "black",
           top: 5,
           zIndex: 999,
           opacity: 1,
         }}
         size="small"
       >
-        <MenuIcon />
+        <SettingsIcon />
       </Fab>
       <Drawer
-        anchor="left"
+        anchor="right"
         open={isOpen}
         onClose={handleDrawerClose}
         sx={{
@@ -49,35 +46,20 @@ function LeftDrawer() {
           sx: {
             width: 250,
             background: "#242526",
-            opacity: 1,
             color: "white",
-            padding: 3,
+            padding: 2,
           },
         }}
         ModalProps={{
           container: document.getElementById("chatbox"),
           style: { position: "absolute", opacity: 1 },
         }}
-        transitionDuration={{ appear: 700, enter: 700, exit: 300 }}
+        transitionDuration={{ appear: 0, enter: 0, exit: 700 }}
       >
-        <Stack direction="column" spacing={1}>
-          <Button variant="outlined" sx={{ color: "white" }} size="large">
-            New Chat
-          </Button>
-          <ListConversation />
-        </Stack>
-
-        <Divider color="white" sx={{ marginTop: 10, marginBottom: 2 }} />
-
-        <Stack spacing={2}>
-          <Button variant="outlined" sx={{ color: "white" }} size="large">
-            New Prompt
-          </Button>
-          <ListPrompt />
-        </Stack>
+        <Setting />
       </Drawer>
     </>
   );
 }
 
-export default LeftDrawer;
+export default RightDrawer;

@@ -34,10 +34,11 @@ const ChatItem = (props) => {
               .map((text) => <ListItemText primary={text} />);
           } else {
             const code = str.replace(/```/g, "");
+            const codeLanguage = code.split("\n")[0] || "javascript";
             return (
               <Box>
                 <SyntaxHighlighter
-                  language={code.split("\n")[0]}
+                  language={codeLanguage}
                   style={dracula}
                   showLineNumbers={true}
                   // wrapLongLines={true}
