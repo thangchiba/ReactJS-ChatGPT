@@ -3,7 +3,7 @@ import { Button, Divider, Drawer, Fab, Stack, TextField } from "@mui/material";
 import { useState } from "react";
 import Conversation from "./Conversation";
 import ListConversation from "./ListConversation";
-import ListPrompt from "./ListPrompt";
+import ListTeach from "./ListTeach";
 
 function LeftDrawer() {
   const [isOpen, setIsOpen] = useState(false);
@@ -61,19 +61,25 @@ function LeftDrawer() {
         transitionDuration={{ appear: 700, enter: 700, exit: 300 }}
       >
         <Stack direction="column" spacing={1}>
-          <Button variant="outlined" sx={{ color: "white" }} size="large">
+          <Button
+            variant="outlined"
+            sx={{ color: "white" }}
+            size="large"
+            onClick={() =>
+              alert(
+                `Due to local storage limit of 5MB, my application does not support multiple conversations on local storage. Please log in to use this feature. (This feature is coming soon!)`
+              )
+            }
+          >
             New Chat
           </Button>
-          <ListConversation />
+          {/* <ListConversation /> */}
         </Stack>
 
         <Divider color="white" sx={{ marginTop: 10, marginBottom: 2 }} />
 
         <Stack spacing={2}>
-          <Button variant="outlined" sx={{ color: "white" }} size="large">
-            New Prompt
-          </Button>
-          <ListPrompt />
+          <ListTeach />
         </Stack>
       </Drawer>
     </>

@@ -1,9 +1,25 @@
 import BackspaceIcon from "@mui/icons-material/Backspace";
 import { Box, IconButton, TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { teachAction } from "../../../Redux/TeachSlice";
 
-const Prompt = ({ prompt, onDelete }) => {
-  const [value, setValue] = useState(prompt.content);
+const Teach = ({ teach }) => {
+  const dispatch = useDispatch();
+  const [value, setValue] = useState(teach.content);
+
+  function handleRemove() {
+    dispatch(teachAction.removeTeach(teach.id));
+  }
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      dispatch(teachAction.updateTeach({ id: teach.id, content: value }));
+    }, 500);
+
+    return () => clearTimeout(timeoutId);
+  }, [value]);
+
   return (
     <Box
       sx={{
@@ -23,7 +39,7 @@ const Prompt = ({ prompt, onDelete }) => {
           style={{ width: 220 }}
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          label="Prompt"
+          label="Teach"
           placeholder="Enter content to teach AI"
           InputLabelProps={{ style: { color: "white" }, shrink: true }}
           InputProps={{ style: { color: "white" } }}
@@ -36,7 +52,7 @@ const Prompt = ({ prompt, onDelete }) => {
           justifyContent: "flex-end",
         }}
       >
-        <IconButton onClick={() => onDelete(prompt)} mx={0}>
+        <IconButton mx={0} onClick={handleRemove}>
           <BackspaceIcon
             sx={{
               color: "white",
@@ -48,4 +64,4 @@ const Prompt = ({ prompt, onDelete }) => {
   );
 };
 
-export default Prompt;
+export default Teach;

@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
-import { Box, LinearProgress, List, TextField } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { gptAction } from "../../Redux/GPTSlice";
+import { Box, LinearProgress, List } from "@mui/material";
+import { useDispatch } from "react-redux";
 import ChatItem from "./ChatItem";
 
 const StyledChatBoard = styled(Box)({
@@ -18,28 +17,10 @@ const StyledChatBoard = styled(Box)({
 
 const ChatBoard = (props) => {
   const { chunkMessage, messages, loading } = props;
-  const dispatch = useDispatch();
-  const token = useSelector((redux) => redux.gpt.accessToken);
-
-  function updateToken(event) {
-    const newToken = event.target.value;
-    dispatch(gptAction.setAuth({ accessToken: newToken }));
-  }
 
   return (
     <StyledChatBoard id="chatboard">
       <List>
-        {/* <TextField
-          label="Access Token"
-          variant="outlined"
-          fullWidth
-          value={token}
-          onChange={updateToken}
-          color="success"
-          InputProps={{ style: { color: "white" } }}
-          focused
-          placeholder="Enter Token In Here Before Start"
-        /> */}
         {messages.map((message) => (
           <ChatItem key={message.id} message={message} id={message.id} />
         ))}

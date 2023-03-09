@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const InitialState = {
   accessToken: "thangchiba",
+  showAvatar: true,
 };
 
 const GPTSlice = createSlice({
@@ -14,6 +15,9 @@ const GPTSlice = createSlice({
     },
     clearAuth(state, action) {
       state = InitialState;
+    },
+    toggleShowAvatar(state) {
+      state.showAvatar = !state.showAvatar;
     },
   },
 });

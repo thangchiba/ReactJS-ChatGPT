@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const InitialState = {
   isSpeaking: false,
-  isSpeak: true, //Speakable setting
+  isSpeak: false, //Speakable setting
   voice: "",
   rate: 1,
 };

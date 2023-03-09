@@ -4,6 +4,7 @@ import { Stack } from "@mui/system";
 import { useState } from "react";
 import CommonModal from "../../../../Component/UIComponent/Common/CommonModal";
 import SetupToken from "./SetupToken";
+import ShowAvatar from "./ShowAvatar";
 import SpeakSetting from "./Speaker/SpeakSetting";
 import YoutubeTutorial from "./YoutubeTutorial";
 const Setting = () => {
@@ -22,6 +23,7 @@ const Setting = () => {
         <Typography textAlign="center" variant="h3">
           Setting
         </Typography>
+        <ShowAvatar />
         <SetupToken />
         <SpeakSetting />
       </Stack>

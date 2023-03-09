@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { Avatar, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 import { Box } from "@mui/system";
+import { useSelector } from "react-redux";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import {
   dracula,
@@ -15,17 +16,20 @@ const StyledChatItem = styled(ListItem)({
 });
 
 const ChatItem = (props) => {
+  const showAvatar = useSelector((redux) => redux.gpt.showAvatar);
   const { message } = props;
   const codeBlockRegex = /```([\s\S]*?)```/;
   const strings = message.content.split(codeBlockRegex);
   return (
     <StyledChatItem>
-      <ListItemAvatar sx={{ maxWidth: 50 }}>
-        <Avatar
-          src={message.role === "user" ? cumeoLogo : twistedLogo}
-          alt="Avatar"
-        />
-      </ListItemAvatar>
+      {showAvatar && (
+        <ListItemAvatar sx={{ maxWidth: 50 }}>
+          <Avatar
+            src={message.role === "user" ? cumeoLogo : twistedLogo}
+            alt="Avatar"
+          />
+        </ListItemAvatar>
+      )}
       <Box>
         {strings.map((str, index) => {
           if (index % 2 === 0) {

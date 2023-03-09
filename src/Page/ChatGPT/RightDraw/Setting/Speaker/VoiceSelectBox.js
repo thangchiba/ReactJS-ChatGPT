@@ -43,6 +43,8 @@ function VoiceSelectBox(props) {
             />
           )}
           value={selectedVoice}
+          autoHighlight={true}
+          autoSelect={true}
         />
       </FormControl>
     </div>

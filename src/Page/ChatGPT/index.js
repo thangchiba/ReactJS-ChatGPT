@@ -1,18 +1,17 @@
 import styled from "@emotion/styled";
-import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import { BottomNavigation, Fab, Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import useHTTPGPT from "../../HTTP_Request/useHTTPGPT";
-import { gptAction } from "../../Redux/GPTSlice";
 import ChatBoard from "./ChatBoard";
 import ChatForm from "./ChatForm";
 import LeftDrawer from "./LeftDrawer";
+import NewUpdate from "./NewUpdate";
 import RightDrawer from "./RightDraw";
 import useSpeak from "./RightDraw/Setting/Speaker/useSpeak";
+import ScrollDownButton from "./ScrollDownButton";
 
 const StyledCover = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
@@ -54,13 +53,9 @@ const StyledChatBox = styled(Box)(({ theme }) => ({
 }));
 
 const ChatGPT = (props) => {
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const params = new URLSearchParams(location.search);
-  const token = params.get("token");
-
   const speaker = useSpeak();
   const speak = useSelector((redux) => redux.speak);
+  const teach = useSelector((redux) => redux.teach);
   const gptAPI = useHTTPGPT();
   const [messages, setMessages] = useState(
     JSON.parse(localStorage.getItem("messages")) || []
@@ -69,10 +64,6 @@ const ChatGPT = (props) => {
   useEffect(() => {
     localStorage.setItem("messages", JSON.stringify(messages));
   }, [messages]);
-
-  useEffect(() => {
-    dispatch(gptAction.setAuth({ accessToken: token || "" }));
-  }, []);
 
   async function submitChat(content) {
     try {
@@ -84,12 +75,16 @@ const ChatGPT = (props) => {
       let newMessages = [...messages, message];
       setMessages(newMessages);
       const response = await gptAPI.post(
-        newMessages.slice(-8).map((message) => {
-          return {
-            role: message.role,
-            content: message.content,
-          };
-        })
+        teach
+          .map((t) => ({ role: "system", content: t.content }))
+          .concat(
+            newMessages.slice(-8).map((message) => {
+              return {
+                role: message.role,
+                content: message.content,
+              };
+            })
+          )
       );
       newMessages = [...messages, message, response];
       console.log(response);
@@ -101,6 +96,7 @@ const ChatGPT = (props) => {
   }
   return (
     <StyledCover id="cover">
+      <NewUpdate />
       <Grid container sx={{ height: "100%" }} id="container">
         <Grid
           item
@@ -117,23 +113,7 @@ const ChatGPT = (props) => {
               chunkMessage={gptAPI.chunkMessage}
             />
             <ChatForm onSubmit={submitChat} />
-            <Fab
-              id="scroll-up"
-              sx={{
-                position: "absolute",
-                right: 10,
-                bottom: { xs: 70, md: 120 },
-              }}
-              onClick={() => {
-                document
-                  .getElementById("chatboard")
-                  .scrollTo({ top: 0, behavior: "smooth" });
-              }}
-              color="inherit"
-              size="small"
-            >
-              <KeyboardDoubleArrowDownIcon color="primary" />
-            </Fab>
+            <ScrollDownButton />
           </StyledChatBox>
         </Grid>
         <Grid

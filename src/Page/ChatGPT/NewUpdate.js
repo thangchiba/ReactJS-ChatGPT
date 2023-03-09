@@ -1,8 +1,8 @@
 import { Fragment, useState } from "react";
-import CommonModal from "../../UIComponent/Common/CommonModal";
 import { Card, CardContent, Divider, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import { Box } from "@mui/system";
+import CommonModal from "../../Component/UIComponent/Common/CommonModal";
 
 const UpdateCard = ({ releaseDate, versionNumber, features }) => {
   return (
@@ -18,7 +18,7 @@ const UpdateCard = ({ releaseDate, versionNumber, features }) => {
           </Typography>
           {features.map((feature, index) => (
             <Typography key={index} variant="body2">
-              - {feature}
+              ・ {feature}
             </Typography>
           ))}
         </CardContent>
@@ -36,13 +36,23 @@ const StyledTutorialBox = styled(Box)(({ theme }) => ({
 }));
 
 const NewUpdate = (props) => {
-  const { open, setOpen, onClose } = props;
+  const [open, setOpen] = useState(true);
   return (
-    <CommonModal open={open} setOpen={setOpen} onClose={onClose}>
+    <CommonModal open={open} setOpen={setOpen}>
       <Typography variant="h3" color="primary" textAlign="center">
         New Update
       </Typography>
       <StyledTutorialBox>
+        <UpdateCard
+          releaseDate="9/3/2023"
+          versionNumber="Beta 0.0.4"
+          features={[
+            "Teach Feature（Left Bar）",
+            "Setting move to Right Bar",
+            "Speak Voice now can findable and select",
+            "Show/Disable Avatar",
+          ]}
+        />
         <UpdateCard
           releaseDate="6/3/2023"
           versionNumber="Beta 0.0.3"
@@ -60,11 +70,6 @@ const NewUpdate = (props) => {
         <UpdateCard
           releaseDate="4/3/2023"
           versionNumber="Beta 0.0.1"
-          features={["Chatable overthrough openai", "Speakable"]}
-        />
-        <UpdateCard
-          releaseDate="4/3/2023"
-          versionNumber="beta 0.0.1"
           features={["Chatable overthrough openai", "Speakable"]}
         />
       </StyledTutorialBox>

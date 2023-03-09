@@ -8,6 +8,7 @@ const useHTTPGPT = () => {
   const endpoint = APIEndpoint.GPTTurbo;
   const accessToken = useSelector((redux) => redux.gpt.accessToken);
   const freeToken = process.env.REACT_APP_GPT_TOKENS.split(",") || [""];
+  const model = "gpt-3.5-turbo-0301";
   function getRandomToken(array) {
     const index = Math.floor(Math.random() * array.length);
     return array[index];
@@ -26,7 +27,7 @@ const useHTTPGPT = () => {
 
   const sendRequest = async (messages = null) => {
     const body = {
-      model: "gpt-3.5-turbo",
+      model,
       messages,
       stream: true,
     };
