@@ -44,14 +44,17 @@ You can set up only one, but when you set up an array, every time a user sends a
 ## Installation On Docker
 On Linux
 ```bash
-  docker run thangchiba/chatgpt:amd64
+  docker run -p 3000:3000 thangchiba/chatgpt:amd64
 ``` 
 Macos m1/m2 chip
 ```bash
-  docker run thangchiba/chatgpt:arm64
+  docker run -p 3000:3000 thangchiba/chatgpt:arm64
 ``` 
 
-4. Visit `http://localhost:3000` in your web browser to use the app.
+Then Visit `http://localhost:3000` in your web browser to use the app.
+
+## Security
+This application only serves to help you connect to OpenAI. If you want to secure your application, you will need a backend for that purpose.
 
 ## Support
 
