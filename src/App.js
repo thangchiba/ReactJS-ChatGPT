@@ -6,6 +6,7 @@ import ConfiguredTheme from "./theme";
 import ChatGPT from "./Page/ChatGPT";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import RPG from "./Page/RPG";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/chatgpt" />}></Route>
           <Route path="/home/*" element={<Home />} />
+          <Route path="/rpg/*" element={<RPG />} />
           <Route path="/chatgpt/*" element={<ChatGPT />} />
         </Routes>
       </Layout>
